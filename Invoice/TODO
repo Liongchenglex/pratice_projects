@@ -1,0 +1,155 @@
++ SETTING UP DJANGO
+1) Create Virtual environment and activate it
+    -pip3 install virtualenv
+    -virtualenv invoice_env
+    -cd invoice_env
+    -source bin/activate
+2) Install Django and Libraries
+    -pip install Django
+    -pip install djoser (to assist with authentication and token library)
+    -pip install django-rest-framework (to create api framework)
+    -pip install django-cors-headers (library for handling server headers Cross-Origin Resource Sharing [ie make sure everything happening between API and backend is working securely])
+3) Create New Django Project
+    -django-admin startproject invoice
+4) configure the project
+    -work with settings.py
+    -work with urls
+5) add djoser urls to the urls file
+
++ SETTING UP VUE
+6) Install VueCLI
+    -vue --version
+    -npm install bulma (for CSS)
+7) Create vue project
+    -vue create invoice_vue
+8) Install Axios (Library for talking with backend)
+    -npm install axios (inside invoice_vue)
+9) Install Bulma (A CSS framework)
+10) import axios at vue.main.js
+11) vue.store.js =
+    -add state 
+    -add mutations = InitializeStore, setToken, removeToken 
+12) Set App.vue
+    - include token settings beforeCreated()
+
+
++ LOGIN SIGN UP
+13) create skeletal dashboard view
+14) create signup vue
+    -set up signup vue
+    -set the router
+15) create login vue
+    -set up login vue
+    -set the router
+16) create dashboard at $router so that authentication is required
+17) Create My Account.vue
+
+
++ADDING, EDITING CLIENTS
+18) create model for clients (mkdir apps/client)
+    -check that apps.py of apps/client is set to app.client
+    -makemigrations
+    -migrate
+    -register admin 
+    -createsuperuser
+19) create serializers.py at apps.client
+20) create views.py for apps/client
+    -update urls at apps/client
+    -update urls at invoice
+21) create clients.vue
+    -update router
+22) make it possible to view client details
+    -create client.vue (include params)
+    -update router (include params)
+23) make it possible to add clients (i.e post form to clients model)
+    -create Addclient.vue
+    -update router
+    -introduce router-link to addclient from clients.vue
+    -add perform_create function to apps.client.view.py
+24) make it possible to edit clients
+    -Create EditClient.vue
+    -update router
+    -update  apps.client.view.py so that only the user can edit client (Permission)
+    -introduce router-link to edit client at client.vue
+
+
++ TEAMS + BULMA
+25) create app for teams 
+    -python manage.py startapp team apps/team
+    -update settings.py installed app
+    -note: look at apps.py make sure name is apps.team
+    -make models and migrate
+    -register admin
+26) make page for editing team
+    -editteam.vue (skeletal with data() and h1 only)
+    -update router
+    -create team.serializers.py
+    -create team.views.py
+    -update teams.urls and invoice.urls
+27) install bulma toast
+    -npm install bulma toast
+
++ INVOICES
+28) create django app and models for invoices
+    -python manage.py startapp invoices apss/invoices
+    -create Invoice and Item models + update settings + register admin
+29) make it possible to view the invoices
+    -make serializers.py + views.py + urls.py
+    -create invoices.vue + update router
+30) Invoice details
+    -create invoice.vue + update router
+    -add link to Invoice from invoices
+
++FRONTEND ADD INVOICES
+31) Make it possible to get and select client
+    -create AddInvoice.vue + edit router + edit App.vue to include route
+32) Make it possible to add items
+    -create ItemForm.vue in component
+    -create addItem and updateTotals method()
+33) send information to the server
+    -edit performCreate() function
+    -create()
+34) make it possible to submit form
+    -create submitForm()
+35) Add bankacc details to team
+36) Add details of user when logging in:
+    -amend store.index
+    -amend login.vue
+
++MAKE IT POSSIBLE TO GENERATE PDF
+37) Install wkhtmltopdf (http://wkhtmltopdf.org/)
+38) Install pdfkit (pip install django-pdfkit)
+39) Create django view for generating pdf
+    -import pdfkit
+    -create generate_pdf function
+    -create pdf.html template
+    -create model functions get_due_date + get_gross_amount
+40) install js-file-download (npm install js-file-download)
+    -create getPdf() method in Invoice.vue
+41) Add breadcrumbs
+
+42) Create Credit note
+    -add is_credit_for and is_credited to models and serializer
+    -add createCreditNote() to vue
+    -create pdf_creditnote.html
+    -fix button so that credit note will not have create credit note and paid
+43) Show list of invoices on client page
+    -Create ClientInvoiceSerializer
+    -Edit client vue to include invoices
+44) Send reminders
+    -add EMAIL_BACKEND to settigns.py
+    -create send_reminder on invoice.views.py + create urls
+    -create sendReminder() vue
+
+
+
+
+WHen reopening app:
+1) cd invoice_env
+2) source bin/activate
+3) cd invoice
+4) python manage.py runserver
+5) npm run serve
+
+due_date_formatted:
+look at models and then serializer and then vue to understand
