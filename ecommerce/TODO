@@ -1,0 +1,178 @@
++ SETTING UP DJANGO
+1) Create Virtual environment and activate it
+    -pip3 install virtualenv
+    -virtualenv ecommerce_env
+    -cd ecommerce_env
+    -source bin/activate
+2) Install Django and Libraries
+    -pip install Django
+    -pip install djoser (to assist with authentication and token library)
+    -pip install django-rest-framework (to create api framework)
+    -pip install django-cors-headers (library for handling server headers Cross-Origin Resource Sharing [ie make sure everything happening between API and backend is working securely])
+3) Create New Django Project
+    -django-admin startproject invoice
+4) configure the project
+    -work with settings.py
+    -work with urls
+5) add djoser urls to the urls file
+
++ VUE
+6) Install VueCLI
+    -vue --version
+    -npm install bulma (for CSS)
+7) Create vue project
+    -vue create invoice_vue
+8) Install Axios (Library for talking with backend)
+    -npm install axios (inside invoice_vue)
+9) Install Bulma (A CSS framework)
+10) Install fontawesome
+    -got to index.html
+
++ FRONTEND NAV
+11) make the navbar in App.vue
+    -Tips: use a wrapper div to make one element in the template
+12) Hamburger Menu
+    -showMobileMenu 
+
++ DJANGO MODELLING AND APP 
+13) python manage.py startapp {app name}
+14) create models:
+    -Create Category model
+    -Create Product model
+    -for image upload to work = configure settings.py to include MEDIA_URL and MEDIA_ROOT
+    -for image upload = configure main urls file to include MEDIA URL
+
++CREATE SERIALIZER (i.e. get info from databse and turn it into JSON objects)
+15) Create serializer.py
+16) populate views.py
+    -Create LatestProductList class
+17) create app urls.py 
+18) create admin acc at admin.py
+19) Check the JSON object by going to the urls of Django-rest
+20) make sure the image links work
+
++HOME VUE TO DISPLAY ITEMS
+21) write frontend for Home.vue
+22) import axios 
+    - create empty list 
+    -create life cycle hook mounted
+    - create method getLatestProducts()
+    - import axios in main.js
+
++VIEW PRODUCT DETAILS
+23) create class for product details + update urls to include this
+24) create vue for product details
+    -create Product.vue
+    -update router (index.js)
+    -Add 'view details' button on homepage
+
++ADD FUNCTIONS TO CART
+25) set up $store.index.js
+    -set up state to include cart
+    -set up mutation functions to update state
+    -add an addToCart function on Product.vue
+    -show cartTotalLength at App.vue
+26) add pop up to show item has been added to cart
+    -npm install bulma-toast
+    -import toast at Product.vue
+
++LOADING BAR
+27) set up loading BAR
+    -add to $store setIsLoading()
+    -update getProduct() to have setIsLoading() before loading backend data (using axios)
+    -update getLatestProducts() before loading backend data
+    -update App.Vue to have the loading bar CSS
+
++SET DOCUMENT TITLE(ALL PRODUCTS)
+28) Add document.title = "someName" to Product and Home Vue
+
++VIEWING A CATEGORY
+29) Backend for cateogry
+    -Create Category view in view.py
+    -Create CategorySerializer
+    -Update url 
+30) Create Category Vue
+    -Add Categoy.vue
+    -edit Index of router
+    -convert Productbox to a component
+        =create components file
+        =import component
+        =add components object in script of respective pages
+        =add component to template
+    -add a watch object in Category Vue to allow switching between routes
+
++ADD SEARCH FUNCTION
+31) add search view + url
+32) Add search box at app.vue
+32) Add Search.vue 
+33) update router
+
++VIEW CART 
+34) Create Cart.vue + add to router
+35) Create CartItem component
+
++EDIT CART
+36) Add IncrementQuantity and DecrementQuantity methods to CartItem component
+37) Add updateCart() method to CartItem
+38) Add removeFromCart to CartItem
+    -Further add v-on:removeFromCart to CartItem component in Cart.vue
+    -add removefromcart method to Cart.vue
+
++SIGN UP
+39) SignUp.vue + router
+
++LOGIN
+40) add setToken and removeToken function in $store 
+41) add checking of token to InitializeStore at $store
+42) add token to beforeCreate() of App.vue
+43) Create Log in vue + router
+
++CREATE MY ACC PAGE
+44) Create MyAccount.vue
+45) Edit router include meta data setting
+    -Add beforeEach at the end of the code
+    -add meta data to requiredLogin
+    -import store
+46) edit App.vue to change "log In" to "my Account" if isAuthorized
+
++PROCEED TO CHECKOUT
+47) create checkout.vue + router
+
++SUCCESS PAGE
+46) create success.vue + router
+47) Stripe.com
+    -Create STRIPE_SECRET_KEY in settings.py
+48) create a new app called order to keep track of orders in 
+    -python manage.py startapp order to create a new app order
+    -add app to INSTALLED APP in settings.py 
+    -create Order and OrderItem models
+    -create order.view.py
+    -create order.serializer.py
+    -create order.urls.py and update main urls in ecommerce_django
+    -register admin in order.admin.py
+49) Update checkout.vue
+    -push data to order through axios
+    -update index.html to include stripe cdn
+
+
++PURCHASE HISTORY
+50) create MyOrderItemSerialier and MyOrderSerializer 
+51) update views.py + update urls
+52) Update MyAccount.vue
+53) Create OrderSUmmary Component
+
++DEPLOYING DJANGO
+
++DEPLOYING VUE
+
+
+
+
+
+
+
+ 
+
+
+
+
